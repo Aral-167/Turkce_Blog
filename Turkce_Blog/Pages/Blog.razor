@@ -1,0 +1,60 @@
+﻿@page "/"
+@inherits LayoutComponentBase
+
+<div class="container">
+    <header>
+        <h1>Merhaba Selin Hocam!</h1>
+        <br />
+    </header>
+
+    <main>
+        @foreach (var post in BlogPosts)
+        {
+            <article class="blog-post">
+                <h2>@post.Title</h2>
+                <p class="date">@post.Date.ToShortDateString()</p>
+                <div class="image-grid">
+                    @foreach (var imageUrl in post.ImageUrls)
+                    {
+                        <img src="@imageUrl" alt="@post.Title" class="blog-post-image" />
+                    }
+                </div>
+                <p>@post.Content</p>
+            </article>
+        }
+    </main>
+
+    <footer>
+        <p><strong>Okuduğunuz için teşekkürler 😊</strong></p>
+    </footer>
+</div>
+
+@code {
+    // Dummy blog posts
+    private List<BlogPost> BlogPosts = new List<BlogPost>
+    {
+        new BlogPost
+        {
+            Title = "Paris'e Bir Seyahat",
+            Date = new DateTime(2024, 5, 8),
+            ImageUrls = new List<string>
+            {
+                "images/paris0.jpg",
+                "images/paris1.jpg",
+                "images/paris2.jpg",
+                "images/paris3.jpg",
+                "images/paris4.jpg",
+                "images/paris5.jpg"
+            },
+            Content = "Paris, dünyanın en güzel şehirlerinden biri olarak hem tarihi hem de modern yapılarıyla ziyaretçilerini büyüler. Şehrin kalbinde bulunan Eyfel Kulesi, Paris’in en ünlü simgesidir. 1889 yılında yapılan bu devasa demir yapı, hem gündüz hem gece ışıklar altında bambaşka bir güzelliğe sahiptir. Seine Nehri kıyısından kuleyi izlemek ya da tepesine çıkarak Paris’in muhteşem manzarasını seyretmek herkesin hayalini süsler. Sanatseverler için Louvre Müzesi, tam anlamıyla Alice’in harikalar diyarı gibidir. Dünyanın en önemli eserlerinden biri olan Mona Lisa burada sergilenir. Müzenin cam piramit şeklindeki girişi, klasik ve modern mimarinin buluştuğu noktayı temsil eder. Sanatla iç içe bir başka bir yer ise Centre Pompidou’dur. Modern sanat eserlerinin sergilendiği bu bina, ilginç borulu dış cephesiyle dikkat çeker. Şehrin tarihini görmek isteyenler için Panthéon görülmeye değer bir yapıdır. Louis Braille’dan Marie Curie’ye kadar büyük Fransız isimlerinin mezarlarının bulunduğu bu anıt, şehrin kültürel zenginliğini yansıtır. Paris’in ihtişamlı mimarisini görmek isteyenler için Arc de Triomphe (Zafer Takısı) ise adeta bütün bunları taçlandıran bir yapı gibi Champs-Élysées Bulvarı’nın sonunda yer alır. Bu geniş bulvar, lüks mağazaları, kafeleri ve alışveriş olanaklarıyla ünlüdür. Champs-Élysées’de yürüyüş yapmak, Paris’in canlı ve hareketli atmosferini hissetmek için en güzel yollardan biridir. Sonuç olarak, Paris mümkün olduğu sürece kesinlikle gezilmesi gereken muhteşem bir şehirdir fakat buraya sadece eğlenceye, alışverişe değil aynı zamanda olağanüstü kültürel yapıtları, sanat eserlerini görmeye de gelinmelidir.",
+        },
+    };
+
+    private class BlogPost
+    {
+        public string Title { get; set; }
+        public DateTime Date { get; set; }
+        public List<string> ImageUrls { get; set; }
+        public string Content { get; set; }
+    }
+}
